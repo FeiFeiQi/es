@@ -167,15 +167,15 @@ class BuildPlugin implements Plugin<Project> {
     /** Finds and enforces JAVA_HOME is set */
     private static String findJavaHome() {
         String javaHome = System.getenv('JAVA_HOME')
-       /** if (javaHome == null) {
+        if (javaHome == null) {
             if (System.getProperty("idea.active") != null || System.getProperty("eclipse.launcher") != null) {
                 // intellij doesn't set JAVA_HOME, so we use the jdk gradle was run with
                 javaHome = Jvm.current().javaHome
             } else {
                 throw new GradleException('JAVA_HOME must be set to build Elasticsearch')
             }
-        }*/
-        return '/usr/local/jdk1.8.0_144'
+        }
+        return javaHome
     }
 
     /** Finds printable java version of the given JAVA_HOME */

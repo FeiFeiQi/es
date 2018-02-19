@@ -376,6 +376,12 @@ allprojects {
   cleanIdeaBuildDir.setDescription("Deletes the IDEA build directory.")
 
   tasks.cleanIdea.dependsOn(cleanIdeaBuildDir)
+
+  repositories {
+    maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+    mavenCentral()
+  }
+
 }
 
 idea {
@@ -467,3 +473,5 @@ gradle.projectsEvaluated {
     }
   }
 }
+
+
