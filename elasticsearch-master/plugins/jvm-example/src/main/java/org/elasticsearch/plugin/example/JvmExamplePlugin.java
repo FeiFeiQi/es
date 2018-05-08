@@ -19,6 +19,7 @@
 
 package org.elasticsearch.plugin.example;
 
+import org.elasticsearch.action.support.ActionFilter;
 import org.elasticsearch.cluster.metadata.IndexNameExpressionResolver;
 import org.elasticsearch.cluster.node.DiscoveryNodes;
 import org.elasticsearch.common.settings.ClusterSettings;
@@ -32,6 +33,9 @@ import org.elasticsearch.rest.RestController;
 import org.elasticsearch.rest.RestHandler;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -42,8 +46,10 @@ import static java.util.Collections.singletonList;
  */
 public class JvmExamplePlugin extends Plugin implements ActionPlugin {
     private final ExamplePluginConfiguration config;
+    private Settings settings;
 
     public JvmExamplePlugin(Settings settings, Path configPath) {
+        this.settings=settings;
         config = new ExamplePluginConfiguration(new Environment(settings, configPath));
     }
 
@@ -57,5 +63,13 @@ public class JvmExamplePlugin extends Plugin implements ActionPlugin {
             IndexScopedSettings indexScopedSettings, SettingsFilter settingsFilter, IndexNameExpressionResolver indexNameExpressionResolver,
             Supplier<DiscoveryNodes> nodesInCluster) {
         return singletonList(new ExampleCatAction(settings, restController, config));
+    }
+
+    @Override
+    public List<ActionFilter> getActionFilters() {
+        ExampleFilter filter = new ExampleFilter(settings);
+        List<ActionFilter> result = new ArrayList<>();
+        result.add(filter);
+        return result;
     }
 }

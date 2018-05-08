@@ -17,6 +17,9 @@
  * under the License.
  */
 
+apply plugin: 'java'
+apply plugin: 'idea'
+
 esplugin {
   description 'Demonstrates all the pluggable Java entry points in Elasticsearch'
   classname 'org.elasticsearch.plugin.example.JvmExamplePlugin'
