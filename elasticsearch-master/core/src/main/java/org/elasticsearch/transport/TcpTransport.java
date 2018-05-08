@@ -129,7 +129,7 @@ public abstract class TcpTransport<Channel> extends AbstractLifecycleComponent i
     public static final Setting<List<String>> PUBLISH_HOST =
         listSetting("transport.publish_host", HOST, Function.identity(), Setting.Property.NodeScope);
     public static final Setting<String> PORT =
-        new Setting<>("transport.tcp.port", "9300-9400", Function.identity(), Setting.Property.NodeScope);
+        new Setting<>("transport.tcp.port", "9300", Function.identity(), Setting.Property.NodeScope);
     public static final Setting<Integer> PUBLISH_PORT =
         intSetting("transport.publish_port", -1, -1, Setting.Property.NodeScope);
     public static final String DEFAULT_PROFILE = "default";
